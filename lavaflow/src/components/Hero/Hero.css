@@ -10,7 +10,7 @@
 }
 
 /* Sutil detalhe de grade no fundo */
-.hero::before {
+/*.hero::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -20,7 +20,7 @@
   background-size: 40px 40px;
   opacity: 0.3;
   pointer-events: none;
-}
+}*/
 
 /* Badge */
 .hero__badge {
@@ -118,12 +118,15 @@
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid #1f1f1f;
+  background: #111;
+  min-height: 1px;
 }
 .hero__image img {
   width: 100%;
   display: block;
   object-fit: cover;
   max-height: 260px;
+  background: transparent;
 }
 
 /* Stats */

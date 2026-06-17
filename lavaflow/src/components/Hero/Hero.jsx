@@ -37,9 +37,13 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero__image">
-        <img src="/carro.webp" alt="Carro limpo após lavagem profissional" />
-      </div>
+     <div className="hero__image">
+  <img
+    src="/carro.png"
+    alt="Carro limpo após lavagem profissional"
+    onError={e => e.target.closest('.hero__image').style.display = 'none'}
+  />
+</div>
 
       <div className="hero__stats">
         {BUSINESS.stats.map(s => (
