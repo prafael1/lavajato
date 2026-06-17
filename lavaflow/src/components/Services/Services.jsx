@@ -8,6 +8,8 @@ const SERVICES = [
   { id: 4, icon: '🛡️', title: 'Vitrificação',       price: 'a partir de R$500', desc: 'Proteção duradoura com efeito espelhado.' },
   { id: 5, icon: '🧼', title: 'Higienização',       price: 'a partir de R$120', desc: 'Limpeza profunda de bancos, carpetes e painel.' },
   { id: 6, icon: '🔧', title: 'Limpeza de Motor',  price: 'a partir de R$80',  desc: 'Limpeza segura do compartimento do motor.' },
+  { id: 7, icon: '⚙️', title: 'Limpeza de Chassi', price: 'a partir de R$80', desc: 'Limpeza do Chassi e do carro.' },
+  { id: 8, icon: '🏠', title: 'Lavagem em Domicilio ', price: 'a combinar', desc: 'Lavamos seu carro em casa, doméstico ou em outro lugar.' },
 ]
 
 function Services() {
