@@ -41,7 +41,7 @@ function Hero() {
 
      <div className="hero__image">
   <img
-    src="/carro.png"
+    src="/carro4.jpeg"
     alt="Carro limpo após lavagem profissional"
     onError={e => e.target.closest('.hero__image').style.display = 'none'}
   />
