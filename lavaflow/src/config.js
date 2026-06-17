@@ -4,10 +4,10 @@
 
 export const BUSINESS = {
   name:      'LAVA RÁPIDO DO GUI',
-  tagline:   'Lava-Jato em Cotia/SP — Lavagem e Estética Automotiva',
+  tagline:   'Lava-Jato em Carapicuiba/SP — Lavagem e Estética Automotiva',
   city:      'Cotia/SP',
-  address:   'Rua Exemplo, 123 — Cotia/SP',
-  mapsUrl:   'https://maps.google.com/?q=Rua+Exemplo+123+Cotia+SP',
+  address:   'Rua Beverly, 80 —   Carapicuiba/SP',
+  mapsUrl:   'https://maps.google.com/?q=Rua Beverly, 80 Carapicuiba/SP',
   phone:     '(11) 9 95857-8417',
   whatsapp:  '5511958578417',       // só números, com DDI
   hours:     'Segunda a Sábado, 8h–18h',
