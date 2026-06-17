@@ -1,43 +1,61 @@
-import "./Hero.css";
+import { RiWhatsappLine, RiArrowDownLine } from 'react-icons/ri'
+import { BUSINESS, waLink } from '../../config'
+import './Hero.css'
 
 function Hero() {
   return (
     <section className="hero" id="inicio">
 
-      <div className="hero-content">
-
-        <h1>
-          Seu carro limpo, protegido e com aparência de novo
-        </h1>
-
-        <p>
-          Lavagem profissional, higienização interna e estética
-          automotiva para quem valoriza seu veículo.
-        </p>
-
-        <div className="hero-buttons">
-
-          <button className="btn-primary">
-            Solicitar Orçamento
-          </button>
-
-          <button className="btn-secondary">
-            Chamar no WhatsApp
-          </button>
-
+      <div className="hero__content">
+        <div className="hero__badge">
+          <span className="hero__badge-dot" />
+          Aberto agora · {BUSINESS.city}
         </div>
 
+        <h1 className="hero__title">
+          Seu carro <em>brilhando</em><br />em menos de 1h
+        </h1>
+
+        <p className="hero__subtitle">
+          Lavagem profissional, polimento e estética automotiva
+          para quem valoriza o próprio veículo.
+        </p>
+
+        <div className="hero__buttons">
+          <a
+            href={waLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero__btn-wa"
+          >
+            <RiWhatsappLine size={20} />
+            Chamar no WhatsApp
+          </a>
+          <a href="#servicos" className="hero__btn-secondary">
+            Ver serviços e preços
+          </a>
+        </div>
       </div>
 
-      <div className="hero-image">
-        <img
-          src="/carro.webp"
-          alt="Carro"
-        />
+      <div className="hero__image">
+        <img src="/carro.webp" alt="Carro limpo após lavagem profissional" />
       </div>
+
+      <div className="hero__stats">
+        {BUSINESS.stats.map(s => (
+          <div key={s.label} className="hero__stat">
+            <span className="hero__stat-num">{s.num}</span>
+            <span className="hero__stat-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <a href="#servicos" className="hero__scroll-hint" aria-label="Ver serviços">
+        <RiArrowDownLine size={20} />
+      </a>
 
     </section>
-  );
+  )
 }
 
-export default Hero;
+export default Hero

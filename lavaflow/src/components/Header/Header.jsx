@@ -1,28 +1,54 @@
-import './Header.css';
-/*LOGO
+import { useState } from 'react'
+import { RiMenuLine, RiCloseLine } from 'react-icons/ri'
+import { waLink, BUSINESS } from '../../config'
+import './Header.css'
 
-Início
-Serviços
-Galeria
-Contato
+const NAV_LINKS = [
+  { label: 'Início',    href: '#inicio'   },
+  { label: 'Serviços', href: '#servicos'  },
+  { label: 'Contato',  href: '#contato'   },
+]
 
-[ Agendar ]*/
+function Header() {
+  const [open, setOpen] = useState(false)
 
-function Header () {
-    return(
-        <header className="header">
-            <div className="header__logo">
-                <img src="https://i.imgur.com/0r0q3wH.png" alt="logo" />
-            </div>
-            <nav className="nav">
-                <a href="#">Início</a>
-                <a href="#">Serviços</a>
-                <a href="#">Galeria</a>
-                <a href="#">Contato</a>
-            </nav>
-                <button className="btn-agendar">Agendar</button>
-        </header>
-    )
+  return (
+    <header className="header">
+      <a href="#inicio" className="header__logo">
+        {BUSINESS.name.slice(0, 4)}<span className="header__logo-dot">{BUSINESS.name.slice(4)}</span>
+      </a>
 
+      <nav className={`header__nav ${open ? 'header__nav--open' : ''}`}>
+        {NAV_LINKS.map(link => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="header__link"
+            onClick={() => setOpen(false)}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href={waLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="header__btn-wa"
+          onClick={() => setOpen(false)}
+        >
+          Agendar
+        </a>
+      </nav>
+
+      <button
+        className="header__menu-btn"
+        onClick={() => setOpen(prev => !prev)}
+        aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+      >
+        {open ? <RiCloseLine size={22} /> : <RiMenuLine size={22} />}
+      </button>
+    </header>
+  )
 }
-export default Header;
+
+export default Header

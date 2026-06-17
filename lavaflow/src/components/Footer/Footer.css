@@ -1,0 +1,22 @@
+.footer {
+  background: #050505;
+  border-top: 1px solid #111;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.footer__logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.footer__logo-dot {
+  color: #f59e0b;
+}
+.footer__copy {
+  font-size: 0.75rem;
+  color: #444;
+}
