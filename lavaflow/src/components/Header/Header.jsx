@@ -11,6 +11,13 @@ const NAV_LINKS = [
 
 function Header() {
   const [open, setOpen] = useState(false)
+  function getStatus(){
+    const hour = new Date() .getHours()
+    const isOpen = hour >= 8 && hour < 18
+    return isOpen
+      ? {text: 'Aberto agora . Carapicuiba/SP', color: '#22c55e'}
+      : {text: 'Aberto amanhã . Carapicuiba/SP', color: '#ef4444'}
+    }
 
   return (
     <header className="header">

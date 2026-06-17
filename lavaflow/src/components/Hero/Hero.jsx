@@ -1,15 +1,17 @@
 import { RiWhatsappLine, RiArrowDownLine } from 'react-icons/ri'
-import { BUSINESS, waLink } from '../../config'
+import { BUSINESS, waLink, getStatus } from '../../config'
 import './Hero.css'
 
+
 function Hero() {
+  const status = getStatus()
   return (
     <section className="hero" id="inicio">
 
       <div className="hero__content">
         <div className="hero__badge">
-          <span className="hero__badge-dot" />
-          Aberto agora · {BUSINESS.city}
+          <span className="hero__badge-dot" style={{ background: status.color }} />
+         {status.text}
         </div>
 
         <h1 className="hero__title">
