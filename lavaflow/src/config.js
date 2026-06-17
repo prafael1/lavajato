@@ -3,13 +3,13 @@
 // ============================================================
 
 export const BUSINESS = {
-  name:      'LavaFlow',
+  name:      'LAVA RÁPIDO DO GUI',
   tagline:   'Lava-Jato em Cotia/SP — Lavagem e Estética Automotiva',
   city:      'Cotia/SP',
   address:   'Rua Exemplo, 123 — Cotia/SP',
   mapsUrl:   'https://maps.google.com/?q=Rua+Exemplo+123+Cotia+SP',
-  phone:     '(11) 9 9999-9999',
-  whatsapp:  '5511999999999',       // só números, com DDI
+  phone:     '(11) 9 95857-8417',
+  whatsapp:  '5511958578417',       // só números, com DDI
   hours:     'Segunda a Sábado, 8h–18h',
   stats: [
     { num: '500+',   label: 'Clientes' },
