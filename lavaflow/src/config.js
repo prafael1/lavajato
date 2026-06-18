@@ -32,7 +32,7 @@ export const SERVICES = [
     price: 'a partir de R$30',
     desc: 'Limpeza externa rápida e cuidadosa.',
     duration: 30,
-    exclusivo: false,
+    exclusivo: true,
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ export const SERVICES = [
     price: 'a partir de R$50',
     desc: 'Interna e externa com acabamento detalhado.',
     duration: 45,
-    exclusivo: false,
+    exclusivo: true,
     featured: true,
   },
   {
@@ -88,15 +88,6 @@ export const SERVICES = [
     desc: 'Limpeza do chassi e parte inferior do veículo.',
     duration: 60,
     exclusivo: true,
-  },
-  {
-    id: 8,
-    icon: '🏠',
-    title: 'Lavagem em Domicílio',
-    price: 'a combinar',
-    desc: 'Lavamos seu carro em casa, condomínio ou empresa.',
-    duration: 60,
-    exclusivo: false,
   },
 ]
 
