@@ -10,6 +10,7 @@ export const BUSINESS = {
   mapsUrl:   'https://maps.google.com/?q=Rua+Beverly+80+Carapicuiba+SP',
   phone:     '(11) 9 5857-8417',
   whatsapp:  '5511958578417',
+  email:     'prafaelpb1@gmail.com',  // ← troque pelo email real
   hours:     'Ter–Sex 7h–17h · Sáb–Dom 7h–19h',
   stats: [
     { num: '500+',  label: 'Clientes' },
@@ -31,7 +32,7 @@ export const SERVICES = [
     price: 'a partir de R$30',
     desc: 'Limpeza externa rápida e cuidadosa.',
     duration: 30,
-    exclusivo: true,
+    exclusivo: false,
   },
   {
     id: 2,

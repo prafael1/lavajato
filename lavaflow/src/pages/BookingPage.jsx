@@ -1,10 +1,17 @@
 import { useSearchParams, Link } from 'react-router-dom'
 import { useState, useEffect }   from 'react'
 import { ref, push, onValue }    from 'firebase/database'
+import emailjs                   from '@emailjs/browser'
 import { db }                    from '../firebase'
 import { SERVICES, BUSINESS, getAvailableSlots, bookingWaMsg } from '../config'
 import '../components/Booking/Booking.css'
 import './BookingPage.css'
+
+// ── EmailJS ──────────────────────────────────────────────
+const EJS_SERVICE  = 'service_elsfe9p'
+const EJS_TEMPLATE = 'template_8n7e30m'
+const EJS_KEY      = '1r9maxk_qYgt8GpdV'
+// ─────────────────────────────────────────────────────────
 
 const STEPS = ['Serviço', 'Data e Hora', 'Seus Dados', 'Confirmado']
 const EMPTY  = { name: '', phone: '' }
@@ -19,27 +26,19 @@ function formatDate(str) {
   return `${d}/${m}/${y}`
 }
 
-function StarDisplay({ count }) {
-  return (
-    <span style={{ color: '#f59e0b' }}>
-      {'★'.repeat(count)}{'☆'.repeat(5 - count)}
-    </span>
-  )
-}
-
 export default function BookingPage() {
-  const [searchParams]            = useSearchParams()
-  const preSelected               = SERVICES.find(s => s.id === Number(searchParams.get('servico')))
+  const [searchParams]        = useSearchParams()
+  const preSelected           = SERVICES.find(s => s.id === Number(searchParams.get('servico')))
 
-  const [step, setStep]           = useState(preSelected ? 1 : 0)
-  const [service, setService]     = useState(preSelected || null)
-  const [date, setDate]           = useState('')
-  const [slot, setSlot]           = useState(null)
-  const [form, setForm]           = useState(EMPTY)
-  const [bookings, setBookings]   = useState([])
-  const [slots, setSlots]         = useState([])
-  const [sending, setSending]     = useState(false)
-  const [error, setError]         = useState('')
+  const [step, setStep]       = useState(preSelected ? 1 : 0)
+  const [service, setService] = useState(preSelected || null)
+  const [date, setDate]       = useState('')
+  const [slot, setSlot]       = useState(null)
+  const [form, setForm]       = useState(EMPTY)
+  const [bookings, setBookings] = useState([])
+  const [slots, setSlots]     = useState([])
+  const [sending, setSending] = useState(false)
+  const [error, setError]     = useState('')
 
   useEffect(() => {
     const unsub = onValue(ref(db, 'bookings'), snap => {
@@ -78,9 +77,30 @@ export default function BookingPage() {
         exclusivo: service.exclusivo,
         createdAt: Date.now(),
       }
+
+      // 1 — Salva no Firebase
       await push(ref(db, 'bookings'), booking)
+
+      // 2 — Envia email para o Gui via EmailJS
+      await emailjs.send(
+        EJS_SERVICE,
+        EJS_TEMPLATE,
+        {
+          to_email:      BUSINESS.email,
+          client_name:   booking.name,
+          client_phone:  booking.phone,
+          service_name:  service.title,
+          date:          formatDate(date),
+          time:          slot.label,
+          duration:      `${service.duration} min`,
+        },
+        EJS_KEY
+      )
+
+      // 3 — Abre WhatsApp como canal secundário
       const msg = bookingWaMsg(booking, service)
       window.open(`https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank')
+
       setStep(3)
     } catch {
       setError('Erro ao agendar. Tente novamente.')
@@ -98,7 +118,6 @@ export default function BookingPage() {
   return (
     <div className="bp">
 
-      {/* Topo */}
       <div className="bp__top">
         <Link to="/" className="bp__back-home">← Voltar ao site</Link>
         <div className="bp__logo">
@@ -246,7 +265,7 @@ export default function BookingPage() {
               📱 {form.phone}
             </p>
             <p className="booking__success-sub">
-              O Gui foi notificado pelo WhatsApp e entrará em contato se necessário.
+              O Gui foi notificado por email e WhatsApp.
             </p>
             <div className="bp__success-btns">
               <button className="booking__confirm-btn" onClick={reset}>
