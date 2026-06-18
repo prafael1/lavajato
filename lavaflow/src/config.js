@@ -106,6 +106,10 @@ export const SCHEDULE = {
 export function getAvailableSlots(dateStr, existingBookings, serviceDuration) {
   const date      = new Date(dateStr)
   const dayOfWeek = date.getDay()
+   const now        = new Date()
+  const isToday    = dateStr === now.toISOString().split('T')[0]
+  const currentMin = isToday ? now.getHours() * 60 + now.getMinutes() : 0
+
 
   let open = null, close = null
   if (SCHEDULE.weekdays.days.includes(dayOfWeek)) {
@@ -116,15 +120,16 @@ export function getAvailableSlots(dateStr, existingBookings, serviceDuration) {
   if (open === null) return []
 
   // Gera todos os slots de 30 em 30 min
-  const slots = []
+const slots = []
   for (let h = open; h < close; h++) {
     for (let m = 0; m < 60; m += 30) {
       const totalMin = h * 60 + m
       if (totalMin + serviceDuration > close * 60) break
+      // Bloqueia horários que já passaram (com 30min de antecedência mínima)
+      if (isToday && totalMin < currentMin + 30) continue
       slots.push(totalMin)
     }
   }
-
   // Filtra agendamentos do dia
   const bookingsOfDay = existingBookings.filter(b => b.date === dateStr)
 
