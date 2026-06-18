@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { RiMenuLine, RiCloseLine } from 'react-icons/ri'
-import { waLink, BUSINESS } from '../../config'
+import { BUSINESS, getStatus } from '../../config'
 import './Header.css'
 
 const NAV_LINKS = [
@@ -11,13 +12,6 @@ const NAV_LINKS = [
 
 function Header() {
   const [open, setOpen] = useState(false)
-  function getStatus(){
-    const hour = new Date() .getHours()
-    const isOpen = hour >= 8 && hour < 18
-    return isOpen
-      ? {text: 'Aberto agora . Carapicuiba/SP', color: '#22c55e'}
-      : {text: 'Aberto amanhã . Carapicuiba/SP', color: '#ef4444'}
-    }
 
   return (
     <header className="header">
@@ -36,15 +30,13 @@ function Header() {
             {link.label}
           </a>
         ))}
-        <a
-          href={waLink()}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/agendamento"
           className="header__btn-wa"
           onClick={() => setOpen(false)}
         >
           Agendar
-        </a>
+        </Link>
       </nav>
 
       <button

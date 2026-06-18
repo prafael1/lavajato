@@ -1,0 +1,120 @@
+.bp {
+  min-height: 100svh;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topo */
+.bp__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.bp__back-home {
+  color: #555;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.bp__back-home:hover { color: #fff; }
+
+.bp__logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.bp__logo-dot { color: #f59e0b; }
+
+/* Container */
+.bp__container {
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.bp__title {
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 2rem;
+}
+
+/* Badge do serviço selecionado */
+.bp__service-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a1a;
+  border: 1px solid #f59e0b33;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.bp__service-duration {
+  color: #666;
+  font-weight: 400;
+}
+
+/* Resumo do agendamento */
+.bp__summary {
+  background: #111;
+  border: 1px solid #1f1f1f;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+.bp__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 0.875rem;
+}
+.bp__summary-row:last-child { border-bottom: none; }
+.bp__summary-row span  { color: #666; }
+.bp__summary-row strong { color: #fff; }
+
+/* Botões da tela de sucesso */
+.bp__success-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.bp__home-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #f59e0b;
+  border: 1.5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 0.9rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.bp__home-btn:hover {
+  background: #f59e0b;
+  color: #0a0a0a;
+}
+
+@media (min-width: 768px) {
+  .bp__container { padding: 3rem 1.25rem 5rem; }
+}

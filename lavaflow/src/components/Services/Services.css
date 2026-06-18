@@ -120,3 +120,24 @@
     gap: 1.25rem;
   }
 }
+
+/* Botão agendar no card */
+.services__agendar-btn {
+  display: block;
+  margin-top: 0.75rem;
+  background: #f59e0b;
+  color: #0a0a0a;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 0.55rem 0;
+  transition: opacity 0.2s;
+}
+.services__agendar-btn:hover { opacity: 0.85; }
+.services__card--featured .services__agendar-btn {
+  background: #f59e0b;
+  color: #0a0a0a;
+}
