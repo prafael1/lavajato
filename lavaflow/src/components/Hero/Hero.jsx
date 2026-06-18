@@ -8,7 +8,7 @@ import './Hero.css'
 function Hero() {
   const status = getStatus()
 
-  const [avgRating,     setAvgRating]     = useState(null)
+  const [avgRating, setAvgRating] = useState(null)
   const [totalBookings, setTotalBookings] = useState(null)
 
   useEffect(() => {
@@ -33,35 +33,31 @@ function Hero() {
 
   const stats = [
     { num: totalBookings !== null ? `${totalBookings}+` : '...', label: 'Clientes' },
-    { num: avgRating     !== null ? `${avgRating}★`     : '5.0★', label: 'Avaliação' },
+    { num: avgRating !== null ? `${avgRating}★` : '5.0★', label: 'Avaliação' },
     { num: '5 anos', label: 'Experiência' },
   ]
 
   return (
     <section className="hero" id="inicio">
-
       <div className="hero__content">
         <div className="hero__badge">
           <span className="hero__badge-dot" style={{ background: status.color }} />
           {status.text}
         </div>
-
         <h1 className="hero__title">
           Seu carro <em>brilhando</em><br />em menos de 1h
         </h1>
-
         <p className="hero__subtitle">
           Lavagem profissional, polimento e estética automotiva
           para quem valoriza o próprio veículo.
         </p>
-
         <div className="hero__buttons">
-          
+          <a
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="hero__btn-wa"
-          <a>
+          >
             <RiWhatsappLine size={20} />
             Chamar no WhatsApp
           </a>
@@ -70,7 +66,6 @@ function Hero() {
           </a>
         </div>
       </div>
-
       <div className="hero__image">
         <img
           src="/carro.webp"
@@ -78,7 +73,6 @@ function Hero() {
           onError={e => e.target.closest('.hero__image').style.display = 'none'}
         />
       </div>
-
       <div className="hero__stats">
         {stats.map(s => (
           <div key={s.label} className="hero__stat">
@@ -87,11 +81,9 @@ function Hero() {
           </div>
         ))}
       </div>
-
       <a href="#servicos" className="hero__scroll-hint" aria-label="Ver serviços">
         <RiArrowDownLine size={20} />
       </a>
-
     </section>
   )
 }
