@@ -104,43 +104,49 @@ export const SCHEDULE = {
 // Gera slots de horário disponíveis para uma data
 // Recebe agendamentos já existentes e duração do serviço escolhido
 export function getAvailableSlots(dateStr, existingBookings, serviceDuration) {
-  const date    = new Date(dateStr)
+  const date      = new Date(dateStr)
   const dayOfWeek = date.getDay()
 
-  // Descobre horário de abertura/fechamento do dia
   let open = null, close = null
   if (SCHEDULE.weekdays.days.includes(dayOfWeek)) {
     open = SCHEDULE.weekdays.open; close = SCHEDULE.weekdays.close
   } else if (SCHEDULE.weekend.days.includes(dayOfWeek)) {
     open = SCHEDULE.weekend.open; close = SCHEDULE.weekend.close
   }
-  if (open === null) return [] // dia fechado
+  if (open === null) return []
 
-  // Gera todos os slots de 30 em 30 min no dia
+  // Gera todos os slots de 30 em 30 min
   const slots = []
   for (let h = open; h < close; h++) {
     for (let m = 0; m < 60; m += 30) {
       const totalMin = h * 60 + m
-      // Verifica se o serviço cabe antes do fechamento
       if (totalMin + serviceDuration > close * 60) break
       slots.push(totalMin)
     }
   }
 
-  // Filtra slots que conflitam com agendamentos existentes
+  // Filtra agendamentos do dia
   const bookingsOfDay = existingBookings.filter(b => b.date === dateStr)
 
   return slots.filter(slotMin => {
     const slotEnd = slotMin + serviceDuration
+
     return !bookingsOfDay.some(b => {
       const bStart = b.startMin
       const bEnd   = b.startMin + b.duration
-      // Conflito: novo serviço exclusivo OU existente exclusivo = bloqueia sobreposição
+
+      // Verifica sobreposição de horário
       const hasOverlap = slotMin < bEnd && slotEnd > bStart
       if (!hasOverlap) return false
-      // Se algum dos dois for exclusivo, conflita
-      const newIsExclusivo = SERVICES.find(s => s.id === b.serviceId)?.exclusivo ?? true
-      return b.exclusivo || newIsExclusivo
+
+      // Serviço novo É exclusivo → bloqueia qualquer sobreposição
+      // Serviço existente É exclusivo → bloqueia qualquer sobreposição
+      // Ambos NÃO exclusivos → permite (intercala)
+      const newService      = SERVICES.find(s => s.duration === serviceDuration)
+      const newIsExclusivo  = newService?.exclusivo ?? true
+      const existIsExclusivo = b.exclusivo ?? true
+
+      return newIsExclusivo || existIsExclusivo
     })
   }).map(min => {
     const h = Math.floor(min / 60).toString().padStart(2, '0')
